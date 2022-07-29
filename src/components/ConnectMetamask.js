@@ -19,7 +19,7 @@ const ConnectMetamask = () => {
                 alert('Install metamask')
             }
         } catch (error) {
-            console.log(error)
+            console.log('Problem connecting ' + error)
         }
     }
 
