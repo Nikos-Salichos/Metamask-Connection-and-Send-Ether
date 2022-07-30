@@ -24,7 +24,12 @@ const ConnectMetamask = () => {
     }
 
 
-
+    async function getBalanceFromMetamask(accounts, setBalance) {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        let balance = await provider.getBalance(accounts[0]);
+        let formattedBalance = ethers.utils.formatEther(balance);
+        setBalance(formattedBalance);
+    }
 
 
     return (
