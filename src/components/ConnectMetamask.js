@@ -39,8 +39,10 @@ const ConnectMetamask = () => {
                 <h1>Address</h1>
                 <p> {walletAddress}</p>
             </div>
-            <h1>Balance</h1>
-            <p>{balance}</p>
+            <div>
+                <h1>Balance</h1>
+                <p>{balance}</p>
+            </div>
         </div>
     )
 }
