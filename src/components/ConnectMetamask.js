@@ -1,20 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ethers } from 'ethers'
-import { useState } from 'react';
 
 
-const ConnectMetamask = () => {
-
-    const [walletAddress, setWalletAddress] = useState("");
-    const [balance, setBalance] = useState("");
+const ConnectMetamask = function () {
+    const [walletAddress, setWalletAddress] = useState('');
+    let [balance, setBalance] = useState('');
 
     async function requestAccount() {
         try {
             if (window.ethereum) {
                 const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
                 setWalletAddress(accounts[0])
-
-                await getBalanceFromMetamask(accounts, setBalance);
+                return accounts[0];
             } else {
                 alert('Install metamask')
             }
@@ -23,18 +20,26 @@ const ConnectMetamask = () => {
         }
     }
 
-
-    async function getBalanceFromMetamask(accounts, setBalance) {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        let balance = await provider.getBalance(accounts[0]);
-        let formattedBalance = ethers.utils.formatEther(balance);
-        setBalance(formattedBalance);
+    async function connectWallet() {
+        try {
+            if (typeof window.ethereum !== 'undefined') {
+                const account = await requestAccount();
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                balance = await provider.getBalance(account);
+                let formattedBalance = ethers.utils.formatEther(balance);
+                setBalance(formattedBalance);
+            } else {
+                alert('Install metamask')
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
     return (
         <div>
-            <button onClick={requestAccount} >Request Account</button>
+            <button onClick={connectWallet} >Request Account</button>
             <div>
                 <h1>Address</h1>
                 <p> {walletAddress}</p>

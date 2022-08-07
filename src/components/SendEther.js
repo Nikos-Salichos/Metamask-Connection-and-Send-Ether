@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ethers } from 'ethers'
 
 
-const SendEtherButton = () => {
+const SendEther = () => {
 
     const [address, setAddress] = useState('')
     const [amount, setAmount] = useState('')
@@ -63,7 +63,8 @@ const SendEtherButton = () => {
                     type='number'
                     pattern="[0-9]*"
                     value={amount}
-                    onChange={(e) => validateAmount(e)}//setAmount(e.target.value)}
+                    min="0"
+                    onChange={(e) => validateAmount(e)}
                     placeholder="Amount to send"
                     required>
                 </input>
@@ -74,4 +75,4 @@ const SendEtherButton = () => {
     )
 }
 
-export default SendEtherButton
+export default SendEther
