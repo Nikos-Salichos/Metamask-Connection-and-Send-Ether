@@ -2,8 +2,7 @@ import './App.css';
 import ConnectMetamask from './components/ConnectMetamask';
 import SendEther from './components/SendEther';
 
-
-//f2 to replace
+//f2 to replace a word
 
 function App() {
   return (
